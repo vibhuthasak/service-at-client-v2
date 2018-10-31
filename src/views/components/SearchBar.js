@@ -19,7 +19,7 @@ const styles = theme => ({
     backgroundColor: '#3f51b5',
     width: '30%',
     marginLeft: 10,
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: theme.shape.borderRadius
   },
   search: {
     position: 'relative',
@@ -29,7 +29,7 @@ const styles = theme => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
-    width: '100%'
+    width: '90%'
   },
   searchIcon: {
     width: theme.spacing.unit * 9,
@@ -42,7 +42,7 @@ const styles = theme => ({
   },
   inputRoot: {
     color: 'inherit',
-    width: '100%',
+    width: '100%'
   },
   inputInput: {
     paddingTop: theme.spacing.unit,
@@ -52,7 +52,10 @@ const styles = theme => ({
     width: '100%'
   },
   button: {
-    marginLeft: theme.spacing.unit,
+    marginLeft: theme.spacing.unit
+  },
+  Toolbar:{
+    minHeight: 48
   }
 });
 
@@ -61,7 +64,7 @@ function SearchBar(props) {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes.appbar}>
-        <Toolbar>
+        <Toolbar className={classes.Toolbar}>
           <div className={classes.search}>
             <InputBase
               placeholder="Search"

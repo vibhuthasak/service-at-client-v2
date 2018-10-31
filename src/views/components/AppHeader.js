@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import { Link } from "react-router-dom";
 
 const styles = {
   root: {
@@ -52,12 +53,16 @@ class MenuAppBar extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               SERVICE @ by SIRA
             </Typography>
-            <Button variant="contained" style={{'background': "#00b0ff", "color": "white"}} className={classes.button}>
-              Dashboard
-            </Button>
-            <Button variant="contained" style={{'background': "#f50057", "color": "white"}} className={classes.button}>
-              Email View
-            </Button>
+            <Link style={{ textDecoration: 'none' }} to="/">
+              <Button variant="contained" style={{'background': "#00b0ff", "color": "white"}} className={classes.button}>
+                Dashboard
+              </Button>
+            </Link>
+            <Link style={{ textDecoration: 'none' }} to="/emails">
+              <Button variant="contained" style={{'background': "#f50057", "color": "white"}} className={classes.button}>
+                Email View
+              </Button>
+            </Link>
             {auth ? (
               <div>
                 <Button
@@ -84,9 +89,13 @@ class MenuAppBar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}
-                >
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                  <MenuItem onClick={this.handleClose}>Log Out</MenuItem>
+                > 
+                   <Link style={{ textDecoration: 'none' }} to="/profile">
+                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                   </Link>
+                  <Link style={{ textDecoration: 'none' }} to="/login">
+                    <MenuItem onClick={this.handleClose}>Log Out</MenuItem>
+                  </Link>
                 </Menu>
               </div>
             ) : <Button color="inherit">Login</Button>

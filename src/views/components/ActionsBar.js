@@ -5,7 +5,7 @@ import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
 import Button from '@material-ui/core/Button';
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
-import ActionsBarOptions from '../components/ActionsBarOptions';
+import ActionsBarOptions from './ActionsBarOptions';
 
 const styles = {
   card: {
@@ -18,7 +18,7 @@ const styles = {
   },
   actionPanel: {
     'marginTop': 14,
-    'marginLeft': 60,
+    'marginLeft': 20,
     'marginBottom': 16,
     'color': 'white',
     'fontSize': 'large',
@@ -30,40 +30,50 @@ const styles = {
 };
 
 class ActionsBar extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      DrawerOpen : false,
+      buttonId: 0
+    }
+  }
+
+  handleButtonClick(id) {
+    this.setState({
+      DrawerOpen: !this.state.DrawerOpen,
+      buttonId: id
+    })
+  }
+
   render() {
     const { classes } = this.props;
-
+    let a = [{id: 1}, {id: 2}, {id: 3}];
+    let buttonNames = ['Create SR / FCR', 'Genie Portal', 'VAS Activation/Deactivations' ]
+    const buttonList = []
+    a.forEach((item, index)=>{
+      buttonList.push(
+      <Button key={item.id} variant="contained" color="primary" className={classes.button} onClick={this.handleButtonClick.bind(this, item.id)}>
+        {buttonNames[index]}
+        <KeyboardArrowDown/>
+      </Button>)
+    })
     // const headerColor = props.background;
     return (
       <div>
         <Card className={classes.card}>
-          <Grid container spacing={0} >
-            <Grid item xs={2} style={{ background: '#3f51b5', 'borderRadius': '4px'}}>
+          <Grid container spacing={8} >
+            <Grid item xs={1} style={{ background: '#3f51b5', 'borderRadius': '4px'}}>
               <div className={classes.actionPanel}>
                 Actions
               </div>
             </Grid>
-            <Grid item xs={10} style={{marginTop: '5px'}}>
-              <Button variant="contained" color="primary" className={classes.button}>
-                Create SR
-                <KeyboardArrowDown/>
-              </Button>
-              <Button variant="contained" color="primary" className={classes.button}>
-                Create FCR
-                <KeyboardArrowDown/>
-              </Button>
-              <Button variant="contained" color="primary" className={classes.button}>
-                Genie Portal
-                <KeyboardArrowDown/>
-              </Button>
-              <Button variant="contained" color="primary" className={classes.button}>
-                VAS Activation/Deactivations
-                <KeyboardArrowDown/>
-              </Button>
+            <Grid item xs={11} style={{marginTop: '5px'}}>
+              {buttonList}
             </Grid>
           </Grid>
         </Card>
-        <ActionsBarOptions checked={true}/>
+        <ActionsBarOptions checked={this.state.DrawerOpen} buttonId={this.state.buttonId}/>
       </div>
     );
   }

@@ -33,22 +33,9 @@ const styles = theme => ({
     }
 });
 
-let id = 0;
-function createData(name, calories, fat) {
-  id += 1;
-  return {id, name, calories, fat};
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Eclair', 262, 16.0),
-  createData('Cupcake', 305, 3.7),
-  createData('Gingerbread', 356, 16.0),
-];
-
 function EmailDisplay(props) {
-  const { classes } = props;
+  const { classes, rows } = props;
+  // const { rows } = props.emailList;
 
   return (
     <Paper className={classes.root}>
@@ -66,11 +53,10 @@ function EmailDisplay(props) {
             return (
               <TableRow key={row.id} style={{borderRadius: 4}}>
                 <TableCell component="th" scope="row" className={classes.tableDataCell}>
-                  {row.name}
+                  {row.date}
                 </TableCell>
-                <TableCell numeric className={classes.tableDataCell}>{row.calories}</TableCell>
-                <TableCell numeric className={classes.tableDataCell}>{row.fat}</TableCell>
-                <TableCell numeric className={classes.tableDataCell}>{row.carbs}</TableCell>
+                <TableCell numeric className={classes.tableDataCell}>{row.subject}</TableCell>
+                <TableCell numeric className={classes.tableDataCell}>{row.message}</TableCell>
               </TableRow>
             );
           })}

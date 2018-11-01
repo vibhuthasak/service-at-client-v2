@@ -52,35 +52,80 @@ const styles = theme => ({
     width: '100%'
   },
   button: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing.unit,
+    minWidth: 0
   },
   Toolbar:{
     minHeight: 48
   }
 });
 
-function SearchBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" className={classes.appbar}>
-        <Toolbar className={classes.Toolbar}>
-          <div className={classes.search}>
-            <InputBase
-              placeholder="Search"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-            />
-          </div>
-          <Button variant="contained" color="secondary" className={classes.button}>
-            <SearchIcon />
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      searchVal : ''
+    }
+  }
+
+  SearchBarTyping(e) {
+    // console.log(e.target.value
+    this.setState({
+      searchVal: e.target.value,
+    });
+  }
+
+  onClickGetEmails() {
+    if(this.state.searchVal.length !== 0) {
+      fetch('emails.json')
+        .then(
+          function(response) {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' + response.status);
+              return;
+            }
+            // Examine the text in the response
+            response.json().then(function(data) {
+              console.log(data);
+              this.props.handleEmailChange(data)
+              // this.setState({
+              //   EmailsFromServer: data
+              // })
+            }.bind(this));
+          }.bind(this)
+        )
+        .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
+
+    }
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" className={classes.appbar}>
+          <Toolbar className={classes.Toolbar}>
+            <div className={classes.search}>
+              <InputBase
+                placeholder="Search"
+                type='email'
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                onChange={this.SearchBarTyping.bind(this)}
+              />
+            </div>
+            <Button variant="contained" color="secondary" className={classes.button} onClick={this.onClickGetEmails.bind(this)}>
+              <SearchIcon />
+            </Button>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  }
 }
 
 SearchBar.propTypes = {

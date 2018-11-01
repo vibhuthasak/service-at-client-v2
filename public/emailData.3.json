@@ -1,0 +1,16 @@
+{ 
+  "TotalMails": 1000,
+  "TotalCorrect": 324,
+  "UsageMails": 130,
+  "UsageCorrect": 40,
+  "RechargeMails": 410,
+  "RechargeCorrect": 310,
+  "GenieMails": 100,
+  "GenieCorrect": 70,
+  "BillingMails": 30,
+  "BillingCorrect": 10,
+  "VasMails": 51,
+  "VasCorrect": 18,
+  "OtherMails": 122,
+  "OtherCorrect": 41
+}

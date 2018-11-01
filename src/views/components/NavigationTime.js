@@ -24,10 +24,54 @@ class NavigationTime extends React.Component {
     value: 0
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleChange = async (event, value) => {
+    await this.setState({ value });
+    let emailFileName = `emailData.${this.state.value}.json`;
+    console.log(emailFileName);
+    fetch(emailFileName)
+    .then(
+      function(response) {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            response.status);
+          return;
+        }
+
+        // Examine the text in the response
+        response.json().then(function(data) {
+          data['TimePeriod'] = this.state.value;
+          this.props.handleForChangeValues(data)
+        }.bind(this));
+      }.bind(this)
+    )
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
   };
-  
+
+  componentDidMount() {
+    let emailFileName = `emailData.${this.state.value}.json`;
+    fetch(emailFileName)
+    .then(
+      function(response) {
+        if (response.status !== 200) {
+          console.log('Looks like there was a problem. Status Code: ' +
+            response.status);
+          return;
+        }
+
+        // Examine the text in the response
+        response.json().then(function(data) {
+          data['TimePeriod'] = this.state.value;
+          this.props.handleForChangeValues(data)
+        }.bind(this));
+      }.bind(this)
+    )
+    .catch(function(err) {
+      console.log('Fetch Error :-S', err);
+    });
+  }
+
   render() {
     const { classes } = this.props;
     const { value } = this.state;
@@ -69,7 +113,8 @@ class NavigationTime extends React.Component {
 }
 
 NavigationTime.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  handleForChangeValues: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(NavigationTime);

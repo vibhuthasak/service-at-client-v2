@@ -30,9 +30,9 @@ class ActionsBarOptions extends React.Component {
         const textFieldList = ['Reference No', 'Description', 'Line of Bussiness', 'Sub Area', 'Sub Sub Area', 'SR Type', 'Contact Number', 'Source']
         textFields = <ActionTextFieldsCreateSr textFieldList={textFieldList}/>
       } else if (buttonId === 2) {
-        textFields = 'Genie Portal'
+        textFields = ''
       } else if (buttonId === 3) {
-        textFields = 'VAS Activation'
+        textFields = ''
       }
       
     }

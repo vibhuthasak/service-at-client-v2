@@ -30,13 +30,27 @@ const styles = theme => ({
       textAlign: 'center', 
       color: 'white', 
       'fontSize': 'medium'
-    }
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+  button2: {
+    margin: theme.spacing.unit,
+    background: '#f50057'
+  }
 });
+
+function convertFromHex(hex) { 
+  hex = hex.toString();
+  var str = ''; 
+  for (var i = 0; i < hex.length; i += 2) 
+  str += String.fromCharCode(parseInt(hex.substr(i, 2), 16)); 
+  return str; 
+}
 
 function EmailDisplay(props) {
   const { classes, rows } = props;
   // const { rows } = props.emailList;
-
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -45,18 +59,19 @@ function EmailDisplay(props) {
             <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Date/Time </TableCell>
             <TableCell className={classes.tableHeaderCell} style={{ width: '15%' }}> Subject </TableCell>
             <TableCell className={classes.tableHeaderCell} style={{ width: '65%' }}> Message </TableCell>
-            <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}>  </TableCell>
+            <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Options </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map(row => {
             return (
-              <TableRow key={row.id} style={{borderRadius: 4}}>
+              <TableRow key={row.mail_id} style={{borderRadius: 4}}>
                 <TableCell component="th" scope="row" className={classes.tableDataCell}>
-                  {row.date}
+                  {row.recievedTime}
                 </TableCell>
-                <TableCell numeric className={classes.tableDataCell}>{row.subject}</TableCell>
-                <TableCell numeric className={classes.tableDataCell}>{row.message}</TableCell>
+                <TableCell numeric className={classes.tableDataCell}>{convertFromHex(row.subject)}</TableCell>
+                <TableCell numeric className={classes.tableDataCell}>{convertFromHex(row.bodypreview)}</TableCell>
+            <TableCell numeric className={classes.tableDataCell}>{'<a>Full Mail</a>'} {row.hasAttachment === 'true'? '<a>Show Attachment</a>' : ''}</TableCell>
               </TableRow>
             );
           })}

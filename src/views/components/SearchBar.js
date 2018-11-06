@@ -7,6 +7,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SearchIcon from '@material-ui/icons/Search';
+import axios from 'axios';
 
 const styles = theme => ({
   root: {
@@ -77,27 +78,37 @@ class SearchBar extends React.Component {
 
   onClickGetEmails() {
     if(this.state.searchVal.length !== 0) {
-      fetch('emails.json')
-        .then(
-          function(response) {
-            if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' + response.status);
-              return;
-            }
-            // Examine the text in the response
-            response.json().then(function(data) {
-              console.log(data);
-              this.props.handleEmailChange(data)
-              // this.setState({
-              //   EmailsFromServer: data
-              // })
-            }.bind(this));
-          }.bind(this)
-        )
-        .catch(function(err) {
-          console.log('Fetch Error :-S', err);
-        });
-
+      // fetch('emails.json')
+      //   .then(
+      //     function(response) {
+      //       if (response.status !== 200) {
+      //         console.log('Looks like there was a problem. Status Code: ' + response.status);
+      //         return;
+      //       }
+      //       // Examine the text in the response
+      //       response.json().then(function(data) {
+      //         console.log(data);
+      //         this.props.handleEmailChange(data)
+      //         // this.setState({
+      //         //   EmailsFromServer: data
+      //         // })
+      //       }.bind(this));
+      //     }.bind(this)
+      //   )
+      //   .catch(function(err) {
+      //     console.log('Fetch Error :-S', err);
+      //   });
+      axios.get('localhost:3009/api/getEmailList', {
+        params: {
+          cxemail: this.state.searchVal
+        }
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
   }
 

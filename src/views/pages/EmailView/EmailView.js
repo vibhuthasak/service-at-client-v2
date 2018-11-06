@@ -17,7 +17,7 @@ class EmailView extends Component {
 
   handleEmailListChange(values) {
     this.setState({
-      EmailList: values 
+      EmailList: values
     });
   }
 

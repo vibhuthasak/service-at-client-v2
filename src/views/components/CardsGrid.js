@@ -38,7 +38,7 @@ function CardsGrid(props) {
           <CustomCard title={'Billing'} background={'#ff9800'} totalMails={formData.BillingMails} totalClassfied={formData.BillingCorrect}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'VAS Related'} background={'#d500f9'} totalMails={formData.VasMails} totalClassfied={formData.VasCorrect}/>
+          <CustomCard title={'Activation/Deactivations'} background={'#d500f9'} totalMails={formData.VasMails} totalClassfied={formData.VasCorrect}/>
         </Grid>
         <Grid item xs={3}>
           <CustomCard title={'Undecided'} background={'#9e9e9e'} totalMails={formData.OtherMails} totalClassfied={formData.OtherCorrect}/>

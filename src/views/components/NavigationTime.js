@@ -26,9 +26,7 @@ class NavigationTime extends React.Component {
 
   handleChange = async (event, value) => {
     await this.setState({ value });
-    let emailFileName = `emailData.${this.state.value}.json`;
-    console.log(emailFileName);
-    fetch(emailFileName)
+    fetch(`https://sira.dialog.lk/sat/api/getTotalEmails?timePeriod=${this.state.value}`)
     .then(
       function(response) {
         if (response.status !== 200) {
@@ -36,9 +34,9 @@ class NavigationTime extends React.Component {
             response.status);
           return;
         }
-
         // Examine the text in the response
         response.json().then(function(data) {
+          console.log(data)
           data['TimePeriod'] = this.state.value;
           this.props.handleForChangeValues(data)
         }.bind(this));
@@ -50,8 +48,7 @@ class NavigationTime extends React.Component {
   };
 
   componentDidMount() {
-    let emailFileName = `emailData.${this.state.value}.json`;
-    fetch(emailFileName)
+    fetch(`https://sira.dialog.lk/sat/api/getTotalEmails?timePeriod=${this.state.value}`)
     .then(
       function(response) {
         if (response.status !== 200) {
@@ -62,6 +59,7 @@ class NavigationTime extends React.Component {
 
         // Examine the text in the response
         response.json().then(function(data) {
+          console.log(data)
           data['TimePeriod'] = this.state.value;
           this.props.handleForChangeValues(data)
         }.bind(this));

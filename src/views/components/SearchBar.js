@@ -76,7 +76,7 @@ class SearchBar extends React.Component {
   }
 
   onClickGetEmails() {
-    var url = ('http://localhost:3009/api/getEmailList?cxemail='+this.state.searchVal);
+    var url = ('https://sira.dialog.lk/sat/api/getEmailList?cxemail='+this.state.searchVal);
     if(this.state.searchVal.length !== 0) {
       fetch(url)
         .then(

@@ -51,7 +51,7 @@ class MenuAppBar extends React.Component {
         <AppBar position="fixed">
         <Toolbar>
             <Typography variant="h6" color="inherit" className={classes.grow}>
-              SERVICE @ by SIRA
+              SERVICE @ by Team undefined
             </Typography>
             <Link style={{ textDecoration: 'none' }} to="/">
               <Button variant="contained" style={{'background': "#00b0ff", "color": "white"}} className={classes.button}>

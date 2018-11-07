@@ -31,18 +31,18 @@ class Dashboard extends Component {
       TimePeriod: values.TimePeriod,
       TotalMails : values.TotalMails,
       TotalCorrect: values.TotalCorrect,
-      UsageMails : values.UsageMails,
-      UsageCorrect : values.UsageCorrect,
-      RechargeMails : values.RechargeMails,
-      RechargeCorrect : values.RechargeCorrect,
-      GenieMails : values.GenieMails,
-      GenieCorrect : values.GenieCorrect,
-      BillingMails : values.BillingMails,
-      BillingCorrect : values.BillingCorrect,
-      VasMails : values.VasMails,
-      VasCorrect : values.VasCorrect,
-      OtherMails : values.OtherMails,
-      OtherCorrect : values.OtherCorrect
+      UsageMails : values.TotalUsage,
+      UsageCorrect : values.CorrectUsage,
+      RechargeMails : values.TotalRechargeCard,
+      RechargeCorrect : values.CorrectechargeCard,
+      GenieMails : values.TotalGenie,
+      GenieCorrect : values.CorrectGenie,
+      BillingMails : values.TotalBilling,
+      BillingCorrect : values.CorrectBilling,
+      VasMails : values.TotalActDeact,
+      VasCorrect : values.CorrectActDeact,
+      OtherMails : values.TotalUndecided,
+      OtherCorrect : values.CorrectUndecided
     });
   }
 

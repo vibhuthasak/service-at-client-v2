@@ -84,6 +84,11 @@ function GetCategory(category){
   }
 }
 
+function getLocalDate(utcDate){
+  let date = new Date(utcDate);
+  return (String(date).slice(0,-31))
+}
+
 function EmailDisplay(props) {
   const { classes, rows } = props;
   // const { rows } = props.emailList;
@@ -110,7 +115,7 @@ function EmailDisplay(props) {
             let fullMail = <IconButton color="primary" className={classes.button} aria-label="Full Mail"> <Mail/> </IconButton>
             return (
               <TableRow key={row.mail_id} style={style}>
-                <TableCell component="th" scope="row" className={classes.tableDataCell}>{row.recievedTime}</TableCell>
+                <TableCell component="th" scope="row" className={classes.tableDataCell}>{getLocalDate(row.recievedTime)}</TableCell>
                 <TableCell numeric className={classes.tableDataCell}>{convertFromHex(row.subject)}</TableCell>
                 <TableCell numeric className={classes.tableDataCell}>{convertFromHex(row.bodypreview)}</TableCell>
                 <TableCell numeric className={classes.tableDataCell}>{optionsCell}{fullMail}</TableCell>

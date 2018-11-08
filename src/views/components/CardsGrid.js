@@ -26,22 +26,22 @@ function CardsGrid(props) {
             <CustomCard2 title={'Total'} background={'#33bfff'} totalMails={formData.TotalMails} totalClassfied={formData.TotalCorrect}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'Usage'} background={'#43a047'} totalMails={formData.UsageMails} totalClassfied={formData.UsageCorrect}/>
+          <CustomCard title={'Usage'} background={'#43a047'} totalMails={formData.UsageMails} totalClassfied={formData.UsageCorrect} totalFullmails={formData.TotalMails}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'Recharge Card Related'} background={'#ff7da8'} totalMails={formData.RechargeMails} totalClassfied={formData.RechargeCorrect}/>
+          <CustomCard title={'Recharge Card Related'} background={'#ff7da8'} totalMails={formData.RechargeMails} totalClassfied={formData.RechargeCorrect} totalFullmails={formData.TotalMails}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'Genie'} background={'#ff3d00'} totalMails={formData.GenieMails} totalClassfied={formData.GenieCorrect}/>
+          <CustomCard title={'Genie'} background={'#ff3d00'} totalMails={formData.GenieMails} totalClassfied={formData.GenieCorrect} totalFullmails={formData.TotalMails}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'Billing'} background={'#ff9800'} totalMails={formData.BillingMails} totalClassfied={formData.BillingCorrect}/>
+          <CustomCard title={'Billing'} background={'#ff9800'} totalMails={formData.BillingMails} totalClassfied={formData.BillingCorrect} totalFullmails={formData.TotalMails}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'Activation/Deactivations'} background={'#d500f9'} totalMails={formData.VasMails} totalClassfied={formData.VasCorrect}/>
+          <CustomCard title={'Activation/Deactivations'} background={'#d500f9'} totalMails={formData.VasMails} totalClassfied={formData.VasCorrect} totalFullmails={formData.TotalMails}/>
         </Grid>
         <Grid item xs={3}>
-          <CustomCard title={'Undecided'} background={'#9e9e9e'} totalMails={formData.OtherMails} totalClassfied={formData.OtherCorrect}/>
+          <CustomCard title={'Undecided'} background={'#9e9e9e'} totalMails={formData.OtherMails} totalClassfied={formData.OtherCorrect} totalFullmails={formData.TotalMails}/>
         </Grid>
       </Grid>
     </div>

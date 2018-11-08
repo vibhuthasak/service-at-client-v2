@@ -38,7 +38,7 @@ function CustomCard(props) {
   // const headerColor = props.background;
   return (
     <Card className={classes.card}>
-      <CardHeader title={title} style={style} titleTypographyProps={{"style" : {fontSize:"larger"}}}/>
+      <CardHeader title={title} style={style} titleTypographyProps={{"style" : {fontSize:"larger"}}} subheader={`${((props.totalMails/props.totalFullmails)*100).toPrecision(4)}%`}/>
       <CardContent>
         <Table className={classes.table}>
           <TableBody>
@@ -68,7 +68,8 @@ CustomCard.propTypes = {
   classes: PropTypes.object.isRequired,
   title: PropTypes.string.isRequired,
   totalMails: PropTypes.number.isRequired,
-  totalClassfied: PropTypes.number.isRequired
+  totalClassfied: PropTypes.number.isRequired,
+  totalFullmails: PropTypes.number.isRequired
 };
 
 export default withStyles(styles)(CustomCard);

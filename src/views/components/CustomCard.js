@@ -54,7 +54,7 @@ class CustomCard extends React.Component {
     const style = {
       background: this.props.background,
     };
-  // const headerColor = props.background;
+    const buttonStatus = ((this.props.ActiveTitle !== title) && this.props.EmailActivated)
     return (
       <Card className={classes.card}>
         <CardHeader title={title} style={style} titleTypographyProps={{"style" : {fontSize:"larger"}}} subheader={`${((this.props.totalMails/this.props.totalFullmails)*100).toPrecision(4)}%`}/>
@@ -77,7 +77,7 @@ class CustomCard extends React.Component {
           </Table>
         </CardContent>
         <CardActions>
-        <Button size="small">List Emails</Button>
+          <Button disabled={buttonStatus} size="small" onClick={this.handleToggle}>{this.state.show ? 'Hide Mails' : 'Show Emails'}</Button>
         </CardActions>
       </Card>
     );

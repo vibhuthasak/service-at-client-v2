@@ -32,7 +32,9 @@ class SimplePortal extends React.Component {
         <div className={classes.alert}>
           {show ? (
             <Portal container={this.container}>
-              <Typography>But I actually render here!</Typography>
+              <EmailDisplayDashboardTable
+                TimePeriod={this.props.TimePeriod}
+                showEmailCategory={this.props.showEmailCategory}
             </Portal>
           ) : null}
         </div>
@@ -47,8 +49,11 @@ class SimplePortal extends React.Component {
   }
 }
 
-SimplePortal.propTypes = {
+EmailDisplayContainer.propTypes = {
   classes: PropTypes.object.isRequired,
+  EmailDisplayDashboard: PropTypes.bool,
+  TimePeriod: PropTypes.number,
+  showEmailCategory: PropTypes.string
 };
 
-export default withStyles(styles)(SimplePortal);
+export default withStyles(styles)(EmailDisplayContainer);

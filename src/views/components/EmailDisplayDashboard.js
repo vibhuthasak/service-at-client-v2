@@ -1,40 +1,28 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Portal from '@material-ui/core/Portal';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
+import React from "react";
+import PropTypes from "prop-types";
+import Portal from "@material-ui/core/Portal";
+import { withStyles } from "@material-ui/core/styles";
+import EmailDisplayDashboardTable from "./EmailDisplayDashboardTable";
 
 const styles = theme => ({
   alert: {
     padding: theme.spacing.unit,
-    margin: `${theme.spacing.unit}px 0`,
-    border: '1px solid',
-    borderColor: theme.palette.text.primary,
-  },
+    margin: `${theme.spacing.unit}px 0`
+  }
 });
 
-class SimplePortal extends React.Component {
-  state = {
-    show: false,
-  };
-
-  handleClick = () => {
-    this.setState(state => ({ show: !state.show }));
-  };
-
+class EmailDisplayContainer extends React.Component {
   render() {
-    const { classes } = this.props;
-    const { show } = this.state;
+    const { classes, EmailDisplayDashboard } = this.props;
     return (
       <div>
-        <Button onClick={this.handleClick}>{show ? 'Unmount children' : 'Mount children'}</Button>
-        <div className={classes.alert}>
-          {show ? (
+        <div>
+          {EmailDisplayDashboard ? (
             <Portal container={this.container}>
               <EmailDisplayDashboardTable
                 TimePeriod={this.props.TimePeriod}
                 showEmailCategory={this.props.showEmailCategory}
+              />
             </Portal>
           ) : null}
         </div>

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-// import '.../App.css';
-import PrimarySearchAppBar from '../../components/AppHeader';
-import CardsGrid from '../../components/CardsGrid';
-import NavigationTime from '../../components/NavigationTime';
+import React, { Component } from "react";
+import PrimarySearchAppBar from "../../components/AppHeader";
+import CardsGrid from "../../components/CardsGrid";
+import NavigationTime from "../../components/NavigationTime";
+import EmailDisplayDashboard from "../../components/EmailDisplayDashboard";
 
 class Dashboard extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       TimePeriod: 0,
       TotalMails: 0,
@@ -23,38 +23,58 @@ class Dashboard extends Component {
       VasCorrect: 0,
       OtherMails: 0,
       OtherCorrect: 0,
-    }
+      showEmailTable: false,
+      showEmailCategory: null
+    };
   }
 
-  handleForChangeValues = (values) => {
+  displayEmailTable = value => {
+    console.log(value);
+    this.setState({
+      showEmailTable: value.state,
+      showEmailCategory: value.category
+    });
+  };
+
+  handleForChangeValues = values => {
     this.setState({
       TimePeriod: values.TimePeriod,
-      TotalMails : values.TotalMails,
+      TotalMails: values.TotalMails,
       TotalCorrect: values.TotalCorrect,
-      UsageMails : values.TotalUsage,
-      UsageCorrect : values.CorrectUsage,
-      RechargeMails : values.TotalRechargeCard,
-      RechargeCorrect : values.CorrectechargeCard,
-      GenieMails : values.TotalGenie,
-      GenieCorrect : values.CorrectGenie,
-      BillingMails : values.TotalBilling,
-      BillingCorrect : values.CorrectBilling,
-      VasMails : values.TotalActDeact,
-      VasCorrect : values.CorrectActDeact,
-      OtherMails : values.TotalUndecided,
-      OtherCorrect : values.CorrectUndecided
+      UsageMails: values.TotalUsage,
+      UsageCorrect: values.CorrectUsage,
+      RechargeMails: values.TotalRechargeCard,
+      RechargeCorrect: values.CorrectechargeCard,
+      GenieMails: values.TotalGenie,
+      GenieCorrect: values.CorrectGenie,
+      BillingMails: values.TotalBilling,
+      BillingCorrect: values.CorrectBilling,
+      VasMails: values.TotalActDeact,
+      VasCorrect: values.CorrectActDeact,
+      OtherMails: values.TotalUndecided,
+      OtherCorrect: values.CorrectUndecided
     });
-  }
+  };
 
   render() {
     return (
       <div className="App">
         <PrimarySearchAppBar />
-        <NavigationTime handleForChangeValues={this.handleForChangeValues}/>
-        <CardsGrid formData={this.state}/>
+        <NavigationTime handleForChangeValues={this.handleForChangeValues} />
+        <CardsGrid
+          formData={this.state}
+          displayEmailTable={this.displayEmailTable}
+          ActiveTitle={this.state.showEmailCategory}
+          EmailActivated={this.state.showEmailTable}
+        />
+        <EmailDisplayDashboard
+          EmailDisplayDashboard={this.state.showEmailTable}
+          TimePeriod={this.state.TimePeriod}
+          showEmailCategory={this.state.showEmailCategory}
+        />
       </div>
     );
   }
-  }
-  
-  export default Dashboard;
+}
+
+export default Dashboard;

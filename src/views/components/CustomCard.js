@@ -77,7 +77,7 @@ class CustomCard extends React.Component {
           </Table>
         </CardContent>
         <CardActions>
-          <Button disabled={buttonStatus} size="small" onClick={this.handleToggle}>{this.state.show ? 'Hide Mails' : 'Show Emails'}</Button>
+          <Button disabled={buttonStatus} size="small" onClick={this.handleToggle}>{(this.state.show && this.props.EmailActivated) ? 'Hide Mails' : 'Show Emails'}</Button>
         </CardActions>
       </Card>
     );

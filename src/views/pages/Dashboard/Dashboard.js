@@ -51,7 +51,9 @@ class Dashboard extends Component {
       VasMails: values.TotalActDeact,
       VasCorrect: values.CorrectActDeact,
       OtherMails: values.TotalUndecided,
-      OtherCorrect: values.CorrectUndecided
+      OtherCorrect: values.CorrectUndecided,
+      showEmailTable: false,
+      showEmailCategory: null
     });
   };
 

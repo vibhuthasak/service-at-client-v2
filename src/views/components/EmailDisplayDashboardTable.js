@@ -184,9 +184,13 @@ class CustomPaginationActionsTable extends React.Component {
     this.getData()
   }
 
-  componentDidUpdate() {
+  // This component lifecycle method must be replaced..
+  // Need to refer Docs !! TODO
+  componentWillReceiveProps() {
+    if(this._isMount){
       this.getData()
     }
+  }
 
   componentWillUnmount() {
     this._isMount = false;

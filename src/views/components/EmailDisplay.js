@@ -28,7 +28,8 @@ const styles = theme => ({
   tableDataCell:{
     borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
     textAlign: 'left',
-    marginLeft: 0
+    marginLeft: 0,
+    padding: 5
   },
   tableHeaderCell:{
       textAlign: 'center', 

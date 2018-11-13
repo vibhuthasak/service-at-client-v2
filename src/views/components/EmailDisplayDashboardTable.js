@@ -117,9 +117,9 @@ const styles = theme => ({
     overflowX: "auto"
   },
   tableHeaderCell:{
-      textAlign: 'center', 
-      color: 'white', 
-      'fontSize': 'medium'
+    textAlign: 'center', 
+    color: 'white', 
+    fontSize: 'medium'
   },
   tableHead : {
     background: '#3f51b5'
@@ -127,7 +127,8 @@ const styles = theme => ({
   tableDataCell:{
     borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
     textAlign: 'left',
-    marginLeft: 0
+    marginLeft: 0,
+    padding: 5
   },
 });
 
@@ -184,8 +185,8 @@ class CustomPaginationActionsTable extends React.Component {
   }
 
   componentDidUpdate() {
-    this.getData()
-  }
+      this.getData()
+    }
 
   componentWillUnmount() {
     this._isMount = false;
@@ -222,17 +223,17 @@ class CustomPaginationActionsTable extends React.Component {
 
   colorTheme(category){
     if(category === 'Usage') {
-      return 'rgb(67,160,71,0.4)'
+      return 'rgb(67,160,71,0.7)'
     } else if(category === 'RechargeCard') {
-      return 'rgb(255,125,168,0.4)'
+      return 'rgb(255,125,168,0.7)'
     } else if(category === 'Genie') {
-      return 'rgb(255,61,0,0.4)'
+      return 'rgb(255,61,0,0.7)'
     } else if(category === 'Billing') {
-      return 'rgb(255,152,0,0.4)'
+      return 'rgb(255,152,0,0.7)'
     } else if(category === 'ActDeact') {
-      return 'rgb(213,0,249,0.4)'
+      return 'rgb(213,0,249,0.7)'
     } else {
-      return 'rgb(158,158,158,0.4)'
+      return 'rgb(158,158,158,0.7)'
     }
   }
 
@@ -248,8 +249,9 @@ class CustomPaginationActionsTable extends React.Component {
             <TableHead className={classes.tableHead}>
               <TableRow>
                 <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Date/Time </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '15%' }}> Subject </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '55%' }}> Message </TableCell>
+                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Subject </TableCell>
+                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Sender </TableCell>
+                <TableCell className={classes.tableHeaderCell} style={{ width: '50%' }}> Message </TableCell>
                 <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Options </TableCell>
                 <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Predicted Category </TableCell>
               </TableRow>
@@ -269,6 +271,7 @@ class CustomPaginationActionsTable extends React.Component {
                     <TableRow key={row.mail_id} style={style}>
                       <TableCell component="th" scope="row" className={classes.tableDataCell}>{this.getLocalDate(row.recievedTime)}</TableCell>
                       <TableCell numeric className={classes.tableDataCell}>{this.convertFromHex(row.subject)}</TableCell>
+                      <TableCell numeric className={classes.tableDataCell}>{row.sender}</TableCell>                      
                       <TableCell numeric className={classes.tableDataCell}>{this.convertFromHex(row.bodypreview)}</TableCell>
                       <TableCell numeric className={classes.tableDataCell}>{optionsCell}{fullMail}</TableCell>
                       <TableCell numeric className={classes.tableDataCell}>{chip}</TableCell>

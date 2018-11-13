@@ -29,7 +29,6 @@ class Dashboard extends Component {
   }
 
   displayEmailTable = value => {
-    console.log(value);
     this.setState({
       showEmailTable: value.state,
       showEmailCategory: value.category

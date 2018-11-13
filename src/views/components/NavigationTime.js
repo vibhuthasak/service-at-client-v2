@@ -36,7 +36,7 @@ class NavigationTime extends React.Component {
         }
         // Examine the text in the response
         response.json().then(function(data) {
-          console.log(data)
+          // console.log(data)
           data['TimePeriod'] = this.state.value;
           this.props.handleForChangeValues(data)
         }.bind(this));
@@ -59,7 +59,7 @@ class NavigationTime extends React.Component {
 
         // Examine the text in the response
         response.json().then(function(data) {
-          console.log(data)
+          // console.log(data)
           data['TimePeriod'] = this.state.value;
           this.props.handleForChangeValues(data)
         }.bind(this));

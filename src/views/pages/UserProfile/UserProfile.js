@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import PrimarySearchAppBar from '../../components/AppHeader';
 
 class UserProfile extends Component {
-    render() {
-      return (
-        <div>
-            UserProfile Page
-        </div>
-      );
-    }
+  // constructor(props){
+  //   super(props)
+  // }
+  render() {
+    return (
+      <div className="App">
+        <PrimarySearchAppBar/>
+      </div>
+    );
   }
+}
   
   export default UserProfile;

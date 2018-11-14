@@ -13,10 +13,7 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import TableHead from "@material-ui/core/TableHead";
-import Chip from '@material-ui/core/Chip';
-import Attachment from '@material-ui/icons/Attachment';
-import Mail from '@material-ui/icons/Mail'
+import ExpandPanel from './ExpandPanel';
 
 const actionsStyles = theme => ({
   root: {
@@ -128,7 +125,10 @@ const styles = theme => ({
     borderLeft: '1px solid rgba(0, 0, 0, 0.12)',
     textAlign: 'left',
     marginLeft: 0,
-    padding: 5
+    padding: 5,
+    '&:last-child': {
+      paddingRight: 5
+    }
   },
 });
 
@@ -198,7 +198,7 @@ class CustomPaginationActionsTable extends React.Component {
 
   getLocalDate(utcDate){
     let date = new Date(utcDate);
-    return (String(date).slice(0,-31))
+    return (String(date).slice(4,-31))
   }
 
   convertFromHex(hex) { 
@@ -227,17 +227,17 @@ class CustomPaginationActionsTable extends React.Component {
 
   colorTheme(category){
     if(category === 'Usage') {
-      return 'rgb(67,160,71,0.7)'
+      return 'rgb(67,160,71)'
     } else if(category === 'RechargeCard') {
-      return 'rgb(255,125,168,0.7)'
+      return 'rgb(255,125,168)'
     } else if(category === 'Genie') {
-      return 'rgb(255,61,0,0.7)'
+      return 'rgb(255,61,0)'
     } else if(category === 'Billing') {
-      return 'rgb(255,152,0,0.7)'
+      return 'rgb(255,152,0)'
     } else if(category === 'ActDeact') {
-      return 'rgb(213,0,249,0.7)'
+      return 'rgb(213,0,249)'
     } else {
-      return 'rgb(158,158,158,0.7)'
+      return 'rgb(158,158,158)'
     }
   }
 
@@ -250,35 +250,27 @@ class CustomPaginationActionsTable extends React.Component {
       <Paper className={classes.root}>
         <div className={classes.tableWrapper}>
           <Table className={classes.table}>
-            <TableHead className={classes.tableHead}>
-              <TableRow>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Date/Time </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Subject </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Sender </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '50%' }}> Message </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Options </TableCell>
-                <TableCell className={classes.tableHeaderCell} style={{ width: '10%' }}> Predicted Category </TableCell>
-              </TableRow>
-            </TableHead>
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
-                  let style = {borderRadius: 4, background:this.colorTheme(row.categorybyscript)}
-                  let optionsCell = ''
-                  if(row.hasAttachment === 'true'){
-                    optionsCell = <IconButton color="primary" className={classes.button} aria-label="Attachment"> <Attachment /> </IconButton>
-                  }
-                  let fullMail = <IconButton color="primary" className={classes.button} aria-label="Full Mail"> <Mail/> </IconButton>      
-                  let chip = <Chip label={this.GetCategory(row.categorybyscript)} color="primary" className={classes.chip} />
+                  let feedback = (row.categorybyfeedback !== null)
+                  let style = {color: this.colorTheme(row.categorybyscript)}
                   return (
-                    <TableRow key={row.mail_id} style={style}>
-                      <TableCell component="th" scope="row" className={classes.tableDataCell}>{this.getLocalDate(row.recievedTime)}</TableCell>
-                      <TableCell numeric className={classes.tableDataCell}>{this.convertFromHex(row.subject)}</TableCell>
-                      <TableCell numeric className={classes.tableDataCell}>{row.sender}</TableCell>                      
-                      <TableCell numeric className={classes.tableDataCell}>{this.convertFromHex(row.bodypreview)}</TableCell>
-                      <TableCell numeric className={classes.tableDataCell}>{optionsCell}{fullMail}</TableCell>
-                      <TableCell numeric className={classes.tableDataCell}>{chip}</TableCell>
+                    <TableRow key={row.mail_id}>
+                      <TableCell component="th" scope="row" className={classes.tableDataCell}>
+                        <ExpandPanel 
+                          dateTime={this.getLocalDate(row.recievedTime)}
+                          subject={this.convertFromHex(row.subject)}
+                          sender={row.sender}
+                          preview={this.convertFromHex(row.bodypreview)}
+                          attachments={row.hasAttachment === 'true'}
+                          category={this.GetCategory(row.categorybyscript)}
+                          feedback={feedback}
+                          style={style}
+                          id={row.mail_id}
+                        />
+                      </TableCell>
                     </TableRow>
                   );
                 })}

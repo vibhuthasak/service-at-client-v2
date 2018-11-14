@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PrimarySearchAppBar from '../../components/AppHeader';
 import SearchBar from '../../components/SearchBar';
-import SimpleTable from '../../components/EmailDisplay';
+import EmailDisplay from '../../components/EmailDisplay';
 import ActionsBar from '../../components/ActionsBar';
 
 class EmailView extends Component {
@@ -27,7 +27,7 @@ class EmailView extends Component {
         <PrimarySearchAppBar/>
         <SearchBar handleEmailChange={this.handleEmailListChange}/>
         <ActionsBar/>
-        <SimpleTable rows={this.state.EmailList}/>
+        <EmailDisplay rows={this.state.EmailList}/>
       </div>
     );
   }

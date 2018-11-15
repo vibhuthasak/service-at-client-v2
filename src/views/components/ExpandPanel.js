@@ -22,6 +22,10 @@ const styles = theme => ({
     flexBasis: '33.33%',
     flexShrink: 0,
   },
+  summeryClass: {
+    paddingTop: 0,
+    paddingBottom: 8
+  }
 });
 
 class ExpandPanel extends React.Component {
@@ -61,7 +65,7 @@ class ExpandPanel extends React.Component {
             </Grid>
           </Grid>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.summeryClass}>
           <ExpandPanelSummery id={this.props.id} extended={this.state.expanded} attachments={this.props.attachments} feedback={this.props.feedback}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>

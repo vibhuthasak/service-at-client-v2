@@ -12,6 +12,13 @@ import Email from '@material-ui/icons/Email';
 
 class ExpandPanelSummery extends React.Component {
 
+  constructor(props){
+    super(props)
+    this.state = {
+      fullEmail: '',
+      gotFullMail: false
+    }
+  }
 
   handleDownloadClick() {
     console.log('Download Clicked')
@@ -20,6 +27,24 @@ class ExpandPanelSummery extends React.Component {
   FeedbackClick() {
     console.log('Feedback clicked')
   }
+
+  handleFullEmail = async () => {
+    if(!this.state.gotFullMail) {
+      const response = await fetch(`https://sira.dialog.lk/sat/api/getEmailBody?mailId=${this.props.id}`);
+      const json = await response.json();
+      console.log(json.content);
+      await this.setState({
+        fullEmail: json.content,
+        gotFullMail: true
+      });
+    } else {
+      await this.setState({
+        fullEmail: '',
+        gotFullMail: false
+      });
+    }
+  }
+
   feedbackComponent(fgiven, color) {
     return(              
     <div>

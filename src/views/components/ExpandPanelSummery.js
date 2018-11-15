@@ -12,6 +12,14 @@ import Email from '@material-ui/icons/Email';
 
 class ExpandPanelSummery extends React.Component {
 
+
+  handleDownloadClick() {
+    console.log('Download Clicked')
+  }
+
+  FeedbackClick() {
+    console.log('Feedback clicked')
+  }
   feedbackComponent(fgiven, color) {
     return(              
     <div>

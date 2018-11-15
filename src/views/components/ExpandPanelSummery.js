@@ -12,6 +12,26 @@ import Email from '@material-ui/icons/Email';
 
 class ExpandPanelSummery extends React.Component {
 
+  feedbackComponent(fgiven, color) {
+    return(              
+    <div>
+      <Typography 
+        variant="subtitle1" 
+        color="textPrimary" 
+        gutterBottom 
+        style={{display: 'inline-block', color: color, marginRight:10}}> 
+        {fgiven ? 'Feedback given' : 'Feedback not given'}
+      </Typography>
+      <Button 
+        variant="contained" 
+        style={{padding: 5, borderRadius: 5, fontSize: 15, backgroundColor: color, color: 'white'}}
+        onClick={this.FeedbackClick}> 
+        {fgiven ? 'Edit Feedback' : 'Add Feedback'}
+        {fgiven ? <Edit/>: <AddCircle/>}
+      </Button>
+    </div>)
+  }
+
   render() {
     const fullEmailButtonColor = this.state.gotFullMail ? '#fdd835' : '#43a047'
     return (

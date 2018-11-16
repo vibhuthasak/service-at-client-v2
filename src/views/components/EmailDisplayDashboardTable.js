@@ -257,7 +257,7 @@ class CustomPaginationActionsTable extends React.Component {
                   let feedback = (row.categorybyfeedback !== null)
                   let style = {color: this.colorTheme(row.categorybyscript)}
                   return (
-                    <TableRow key={row.mail_id}>
+                    <TableRow key={row.id}>
                       <TableCell component="th" scope="row" className={classes.tableDataCell}>
                         <ExpandPanel 
                           dateTime={this.getLocalDate(row.recievedTime)}
@@ -269,6 +269,7 @@ class CustomPaginationActionsTable extends React.Component {
                           feedback={feedback}
                           style={style}
                           id={row.mail_id}
+                          uniqueId={row.id}
                         />
                       </TableCell>
                     </TableRow>

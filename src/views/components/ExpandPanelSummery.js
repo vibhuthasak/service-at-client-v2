@@ -10,14 +10,24 @@ import Edit from '@material-ui/icons/Edit';
 import CloudDownload from '@material-ui/icons/CloudDownload';
 import Email from '@material-ui/icons/Email';
 
+import NativeSelect from '@material-ui/core/NativeSelect';
+import Add from '@material-ui/icons/Add';
+
+import Paper from '@material-ui/core/Paper';
+import Collapse from '@material-ui/core/Collapse';
+
 class ExpandPanelSummery extends React.Component {
 
   constructor(props){
     super(props)
     this.state = {
       fullEmail: '',
-      gotFullMail: false
+      gotFullMail: false,
+      feedbackCollapse: false,
+      feedbackvalue: this.props.category
     }
+
+    this.handleFeedbackChange = this.handleFeedbackChange.bind(this)
   }
 
   handleDownloadClick() {
@@ -25,7 +35,9 @@ class ExpandPanelSummery extends React.Component {
   }
 
   FeedbackClick() {
-    console.log('Feedback clicked')
+    this.setState({
+      feedbackCollapse: !this.state.feedbackCollapse
+    })
   }
 
   handleFullEmail = async () => {
@@ -45,8 +57,21 @@ class ExpandPanelSummery extends React.Component {
     }
   }
 
+  FeedbackSubmitClick() {
+    alert('Submitted')
+  }
+
+  handleFeedbackChange (event) {
+    // console.log(event.target.value)
+    this.setState({ feedbackvalue: event.target.value });
+  };
+
   feedbackComponent(fgiven, color) {
-    return(              
+    const aiColor = this.props.style;
+    const catList = ['Usage', 'Recharge Card Related', 'Genie', 'Billing', 'Activation/Deactivations', 'Undecided']
+    const fSelect = catList.map((option) => <option key={option}>{option}</option>);
+
+    return(
     <div>
       <Typography 
         variant="subtitle1" 
@@ -55,13 +80,48 @@ class ExpandPanelSummery extends React.Component {
         style={{display: 'inline-block', color: color, marginRight:10}}> 
         {fgiven ? 'Feedback given' : 'Feedback not given'}
       </Typography>
-      <Button 
+
+      <Button
         variant="contained" 
         style={{padding: 5, borderRadius: 5, fontSize: 15, backgroundColor: color, color: 'white'}}
-        onClick={this.FeedbackClick}> 
+        onClick={this.FeedbackClick.bind(this)}>
         {fgiven ? 'Edit Feedback' : 'Add Feedback'}
         {fgiven ? <Edit/>: <AddCircle/>}
       </Button>
+
+      <Grid item xs={12} style={{marginTop: 10}}>
+        <Collapse in={this.state.feedbackCollapse}>
+          <Paper elevation={1} style={{width: '90%'}}>
+            <Typography
+              variant="subtitle1"
+              gutterBottom 
+              style={{color: aiColor.color, marginLeft:10}}>
+              Classified Category By AI : {this.props.category}
+            </Typography>
+
+            <Typography 
+              variant="subtitle1"
+              gutterBottom 
+              style={{display: 'inline-block', marginLeft:10}}>
+              Classified Category By User :
+            </Typography>
+
+            <NativeSelect
+              style={{marginLeft: 5}}
+              onChange={this.handleFeedbackChange}>
+              {fSelect}
+            </NativeSelect>
+
+            <Button
+              variant="contained" 
+              style={{padding: 2, marginLeft: 5, borderRadius: 5, fontSize: 15, backgroundColor: '#00a152', color: 'white'}}
+              onClick={this.FeedbackSubmitClick}
+            > <Add />
+            </Button>
+
+          </Paper>
+        </Collapse>
+      </Grid>
     </div>)
   }
 
@@ -116,8 +176,11 @@ class ExpandPanelSummery extends React.Component {
                 <Email style={{marginLeft: 5}}/>
               </Button>
             </Grid>
-            <Grid item xs={12} style={{'white-space': 'pre-wrap'}}>
-              {this.state.fullEmail}
+
+            <Grid item xs={12} style={{'whiteSpace': 'pre-wrap'}}>
+              <Collapse in={this.state.gotFullMail}>
+                {this.state.fullEmail}
+              </Collapse>
             </Grid>
           </Grid>
         </CardContent>
@@ -127,7 +190,7 @@ class ExpandPanelSummery extends React.Component {
 }
 
 ExpandPanelSummery.propTypes = {
-  // id={this.props.id} extended={this.state.expanded} attachments={this.props.attachments} feedback={this.props.feedback}
+  // id={this.props.id} extended={this.state.expanded} attachments={this.props.attachments} feedback={this.props.feedback} category={this.props.category} style={this.props.style}
 };
 
 export default ExpandPanelSummery;

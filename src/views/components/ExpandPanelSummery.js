@@ -28,6 +28,7 @@ class ExpandPanelSummery extends React.Component {
     }
 
     this.handleFeedbackChange = this.handleFeedbackChange.bind(this)
+    this.FeedbackSubmitClick = this.FeedbackSubmitClick.bind(this)
   }
 
   handleDownloadClick() {
@@ -58,11 +59,23 @@ class ExpandPanelSummery extends React.Component {
   }
 
   FeedbackSubmitClick() {
-    alert('Submitted')
+    const url = 'https://sira.dialog.lk/sat/api/recordFeedback'
+    fetch(url, {
+      method: 'post',
+      headers: {
+        "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      body: `mailId=${this.props.uniqueId}&category=${this.state.feedbackvalue}`
+    })
+    .then(function (data) {
+      alert('Success')
+    })
+    .catch(function (error) {
+      alert('Failed')
+    });
   }
 
   handleFeedbackChange (event) {
-    // console.log(event.target.value)
     this.setState({ feedbackvalue: event.target.value });
   };
 
@@ -190,7 +203,7 @@ class ExpandPanelSummery extends React.Component {
 }
 
 ExpandPanelSummery.propTypes = {
-  // id={this.props.id} extended={this.state.expanded} attachments={this.props.attachments} feedback={this.props.feedback} category={this.props.category} style={this.props.style}
+  // id={this.props.id} extended={this.state.expanded} attachments={this.props.attachments} feedback={this.props.feedback} category={this.props.category} style={this.props.style} uniqueId={this.props.uniqueId}
 };
 
 export default ExpandPanelSummery;

@@ -57,16 +57,16 @@ class CustomCard extends React.Component {
     const buttonStatus = ((this.props.ActiveTitle !== title) && this.props.EmailActivated)
     return (
       <Card className={classes.card}>
-        <CardHeader title={title} style={style} titleTypographyProps={{"style" : {fontSize:"larger"}}} subheader={`${((this.props.totalMails/this.props.totalFullmails)*100).toPrecision(4)}%`}/>
+        <CardHeader title={title} style={style} titleTypographyProps={{"style" : {fontSize:"larger"}}} subheaderTypographyProps={{"style" : {fontSize:"larger"}}} subheader={`${((this.props.totalMails/this.props.totalFullmails)*100).toPrecision(4)}%`}/>
         <CardContent>
           <Table className={classes.table}>
             <TableBody>
               <TableRow>
-                <TableCell style={{'paddingLeft' : '0', 'paddingRight' : '0'}}># of Emails Recieved</TableCell>
+                <TableCell style={{'paddingLeft' : '0', 'paddingRight' : '0'}}>Number of Emails Recieved</TableCell>
                 <TableCell> {this.props.totalMails} </TableCell>
               </TableRow>
               <TableRow>
-                <TableCell style={{'paddingLeft' : '0', 'paddingRight' : '0'}}># of Correctly Classified Emails</TableCell>
+                <TableCell style={{'paddingLeft' : '0', 'paddingRight' : '0'}}>Number of Correctly Classified Emails</TableCell>
                 <TableCell> {this.props.totalClassfied} </TableCell>
               </TableRow>
               <TableRow>
@@ -77,7 +77,7 @@ class CustomCard extends React.Component {
           </Table>
         </CardContent>
         <CardActions>
-          <Button disabled={buttonStatus} size="small" onClick={this.handleToggle}>{(this.state.show && this.props.EmailActivated) ? 'Hide Mails' : 'Show Emails'}</Button>
+          <Button disabled={buttonStatus} size="small" variant="outlined" color="secondary" onClick={this.handleToggle}>{(this.state.show && this.props.EmailActivated) ? 'Hide Mails' : 'Show Emails'}</Button>
         </CardActions>
       </Card>
     );

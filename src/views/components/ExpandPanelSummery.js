@@ -75,13 +75,29 @@ class ExpandPanelSummery extends React.Component {
     });
   }
 
+  reverseCategory(category){
+    if(category === 'Usage') {
+      return 'Usage'
+    } else if(category === 'Recharge Card Related') {
+      return 'RechargeCard'
+    } else if(category === 'Genie') {
+      return 'Genie'
+    } else if(category === 'Billing') {
+      return 'Billing'
+    } else if(category === 'Activation / Deactivations') {
+      return 'ActDeact'
+    } else {
+      return 'Undecided'
+    }
+  }
+
   handleFeedbackChange (event) {
-    this.setState({ feedbackvalue: event.target.value });
+    this.setState({ feedbackvalue: this.reverseCategory(event.target.value)});
   };
 
   feedbackComponent(fgiven, color) {
     const aiColor = this.props.style;
-    const catList = ['Usage', 'Recharge Card Related', 'Genie', 'Billing', 'Activation/Deactivations', 'Undecided']
+    const catList = ['Usage', 'Recharge Card Related', 'Genie', 'Billing', 'Activation / Deactivations', 'Undecided']
     const fSelect = catList.map((option) => <option key={option}>{option}</option>);
 
     return(
@@ -90,8 +106,8 @@ class ExpandPanelSummery extends React.Component {
         variant="subtitle1" 
         color="textPrimary" 
         gutterBottom 
-        style={{display: 'inline-block', color: color, marginRight:10}}> 
-        {fgiven ? 'Feedback given' : 'Feedback not given'}
+        style={{display: 'inline-block', color: color, marginRight:10}}>
+        {fgiven ? 'Feedback given as ' + this.props.feedbackCategory : 'Feedback not given'}
       </Typography>
 
       <Button
@@ -146,7 +162,7 @@ class ExpandPanelSummery extends React.Component {
           <Grid container spacing={8}>
             <Grid item xs={6}>
               {this.props.feedback ?
-                this.feedbackComponent(true, '#43a047')
+                this.feedbackComponent(true, this.props.feedbackColor.color)
                 :
                 this.feedbackComponent(false, '#f44336')
               }

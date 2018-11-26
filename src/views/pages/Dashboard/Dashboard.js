@@ -43,7 +43,7 @@ class Dashboard extends Component {
       UsageMails: values.TotalUsage,
       UsageCorrect: values.CorrectUsage,
       RechargeMails: values.TotalRechargeCard,
-      RechargeCorrect: values.CorrectechargeCard,
+      RechargeCorrect: values.CorrectRechargeCard,
       GenieMails: values.TotalGenie,
       GenieCorrect: values.CorrectGenie,
       BillingMails: values.TotalBilling,

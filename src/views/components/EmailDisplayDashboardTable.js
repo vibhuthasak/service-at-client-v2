@@ -220,8 +220,10 @@ class CustomPaginationActionsTable extends React.Component {
       return 'Billing'
     } else if(category === 'ActDeact') {
       return 'Activations / Deactivations'
-    } else {
+    } else if(category === 'Undecided'){
       return 'Undecided'
+    } else {
+      return ''
     }
   }
 
@@ -236,8 +238,10 @@ class CustomPaginationActionsTable extends React.Component {
       return 'rgb(255,152,0)'
     } else if(category === 'ActDeact') {
       return 'rgb(213,0,249)'
-    } else {
+    } else if(category === 'Undecided') {
       return 'rgb(158,158,158)'
+    } else {
+      return ''
     }
   }
 
@@ -255,7 +259,9 @@ class CustomPaginationActionsTable extends React.Component {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
                   let feedback = (row.categorybyfeedback !== null)
+                  let feedbackCategory = row.categorybyfeedback !== null ? row.categorybyfeedback : ''
                   let style = {color: this.colorTheme(row.categorybyscript)}
+                  let feedbackcolor = {color: this.colorTheme(feedbackCategory)}
                   return (
                     <TableRow key={row.id}>
                       <TableCell component="th" scope="row" className={classes.tableDataCell}>
@@ -266,7 +272,10 @@ class CustomPaginationActionsTable extends React.Component {
                           preview={this.convertFromHex(row.bodypreview)}
                           attachments={row.hasAttachment === 'true'}
                           category={this.GetCategory(row.categorybyscript)}
+                          // category={row.categorybyscript}
+                          feedbackCategory={this.GetCategory(feedbackCategory)}
                           feedback={feedback}
+                          feedbackColor={feedbackcolor}
                           style={style}
                           id={row.mail_id}
                           uniqueId={row.id}

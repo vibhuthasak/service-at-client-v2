@@ -66,7 +66,16 @@ class ExpandPanel extends React.Component {
           </Grid>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.summeryClass}>
-          <ExpandPanelSummery id={this.props.id} extended={this.state.expanded} attachments={this.props.attachments} feedback={this.props.feedback} category={this.props.category} style={this.props.style} uniqueId={this.props.uniqueId}/>
+          <ExpandPanelSummery 
+            id={this.props.id} 
+            extended={this.state.expanded} 
+            attachments={this.props.attachments} 
+            feedback={this.props.feedback} 
+            category={this.props.category} 
+            style={this.props.style} 
+            uniqueId={this.props.uniqueId}
+            feedbackCategory={this.props.feedbackCategory}
+            feedbackColor={this.props.feedbackColor}/>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     );
@@ -84,7 +93,9 @@ ExpandPanel.propTypes = {
   id: PropTypes.string.isRequired,
   category: PropTypes.string,
   style: PropTypes.object,
-  uniqueId: PropTypes.number.isRequired
+  uniqueId: PropTypes.number.isRequired,
+  feedbackCategory: PropTypes.string,
+  feedbackColor: PropTypes.object
 };
 
 export default withStyles(styles)(ExpandPanel);
